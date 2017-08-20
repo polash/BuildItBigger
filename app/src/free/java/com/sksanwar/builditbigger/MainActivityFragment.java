@@ -1,13 +1,16 @@
 package com.sksanwar.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.sksanwar.app.displayjokeslibrary.DisplayJokesActivity;
 
 public class MainActivityFragment extends Fragment {
 
@@ -25,6 +28,15 @@ public class MainActivityFragment extends Fragment {
                 .build();
         mAdView.loadAd(adRequest);
 
+        Button button = (Button) rootView.findViewById(R.id.show_joke_button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent jokeActivityDisplay = new Intent(getActivity(), DisplayJokesActivity.class);
+                startActivity(jokeActivityDisplay);
+            }
+        });
         return rootView;
     }
 }
