@@ -33,10 +33,20 @@ public class MainActivityFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent jokeActivityDisplay = new Intent(getActivity(), DisplayJokesActivity.class);
-                startActivity(jokeActivityDisplay);
+                retriveJokes();
             }
         });
         return rootView;
+    }
+
+    private void retriveJokes(){
+        new FetchJokes(new Listner() {
+            @Override
+            public void onJokeLoaded(String joke) {
+                Intent intent = new Intent(getActivity(), DisplayJokesActivity.class);
+                intent.putExtra(DisplayJokesActivity.JOKE_EXTRA, joke);
+                startActivity(intent);
+            }
+        }).execute();
     }
 }
