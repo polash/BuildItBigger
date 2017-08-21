@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/default_padding"
-    tools:context="com.sksanwar.builditbigger.paid.MainActivityFragment">
+    tools:context="com.sksanwar.builditbigger.MainActivityFragment">
 
+    <TextView
+        android:id="@+id/insturction_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/instruction_tv"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/show_joke_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/insturction_tv"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/button_text"/>
 </RelativeLayout>

@@ -21,10 +21,17 @@ public class FetchJokes extends AsyncTask<Void, Void, String> {
 
     private Listner mListner;
 
+    //default constructor
     public FetchJokes(Listner listner) {
         this.mListner = listner;
     }
 
+    /**
+     * Async task
+     *
+     * @param params
+     * @return
+     */
     @Override
     protected String doInBackground(Void... params) {
         JokeApi myApiService = null;
@@ -33,7 +40,6 @@ public class FetchJokes extends AsyncTask<Void, Void, String> {
             JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {

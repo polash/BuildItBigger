@@ -22,15 +22,14 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_main_fragment, container, false);
 
-        AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
-        // Create an ad request. Check logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        //Adview declaration
+        AdView mAdView = rootView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
 
+        //InterstitialAd declaration
         mInterstitialAd = new InterstitialAd(getContext());
         mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
         requestNewInterstitial();
@@ -38,22 +37,19 @@ public class MainActivityFragment extends Fragment {
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
-//                Log.v(TAG,getResources().getString(R.string.tag_closeAd));
                 requestNewInterstitial();
                 retrieveJoke();
             }
         });
 
-        Button button = (Button) rootView.findViewById(R.id.show_joke_button);
+        Button button = rootView.findViewById(R.id.show_joke_button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mInterstitialAd.isLoaded()) {
-//                    Log.v(TAG,getResources().getString(R.string.tag_showAd));
                     mInterstitialAd.show();
                 } else {
-//                    Log.v(TAG,getResources().getString(R.string.tag_notFinishedLoading));
                     retrieveJoke();
                 }
             }
@@ -61,6 +57,7 @@ public class MainActivityFragment extends Fragment {
         return rootView;
     }
 
+    //method for retrieving jokes
     private void retrieveJoke(){
         new FetchJokes(new Listner() {
             @Override
@@ -72,11 +69,11 @@ public class MainActivityFragment extends Fragment {
         }).execute();
     }
 
+    //method for request new InterstitialAd
     private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-
         mInterstitialAd.loadAd(adRequest);
     }
 }

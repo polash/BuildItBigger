@@ -14,6 +14,10 @@ public class DisplayJokesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_jokes);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         TextView showJokesTextView = (TextView) findViewById(R.id.textview_jokes);
 
         if (getIntent() != null && getIntent().hasExtra(JOKE_EXTRA)){
@@ -24,9 +28,6 @@ public class DisplayJokesActivity extends AppCompatActivity {
             }else {
                 showJokesTextView.setText(R.string.no_jokes);
             }
-        }
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
