@@ -2,6 +2,7 @@ package com.sksanwar.app.displayjokeslibrary;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class DisplayJokesActivity extends AppCompatActivity {
@@ -21,8 +22,19 @@ public class DisplayJokesActivity extends AppCompatActivity {
             if (joke != null || !joke.equals("")){
                 showJokesTextView.setText(joke);
             }else {
-                showJokesTextView.setText("No Jokes here");
+                showJokesTextView.setText(R.string.no_jokes);
             }
         }
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.sksanwar.app.displayjokeslibrary.DisplayJokesActivity;
 
 public class MainActivityFragment extends Fragment {
 
+    private InterstitialAd mInterstitialAd;
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
@@ -28,18 +31,37 @@ public class MainActivityFragment extends Fragment {
                 .build();
         mAdView.loadAd(adRequest);
 
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
+        requestNewInterstitial();
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+//                Log.v(TAG,getResources().getString(R.string.tag_closeAd));
+                requestNewInterstitial();
+                retrieveJoke();
+            }
+        });
+
         Button button = (Button) rootView.findViewById(R.id.show_joke_button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                retriveJokes();
+                if (mInterstitialAd.isLoaded()) {
+//                    Log.v(TAG,getResources().getString(R.string.tag_showAd));
+                    mInterstitialAd.show();
+                } else {
+//                    Log.v(TAG,getResources().getString(R.string.tag_notFinishedLoading));
+                    retrieveJoke();
+                }
             }
         });
         return rootView;
     }
 
-    private void retriveJokes(){
+    private void retrieveJoke(){
         new FetchJokes(new Listner() {
             @Override
             public void onJokeLoaded(String joke) {
@@ -48,5 +70,13 @@ public class MainActivityFragment extends Fragment {
                 startActivity(intent);
             }
         }).execute();
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 }
