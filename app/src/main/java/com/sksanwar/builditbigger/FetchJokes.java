@@ -26,6 +26,7 @@ public class FetchJokes extends AsyncTask<Void, Void, String> {
         this.mListner = listner;
     }
 
+
     /**
      * Async task
      *
