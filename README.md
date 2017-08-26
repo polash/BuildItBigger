@@ -1,3 +1,4 @@
+
 # Gradle for Android and Java Final Project
 
 In this project, you will create an app with multiple flavors that uses
@@ -14,6 +15,7 @@ behavior of the Gradle build tool, allowing automation of repetitive tasks.
 Particularly, factoring functionality into libraries and creating product
 flavors allow for much bigger projects with minimal added complexity.
 
+
 ##What Will I Learn?
 
 You will learn the role of Gradle in building Android Apps and how to use
@@ -25,6 +27,14 @@ Gradle to manage apps of increasing complexity. You'll learn to:
 * Configure a multi project build to compile your libraries and app
 * Use the Gradle App Engine plugin to deploy a backend
 * Configure an integration test suite that runs against the local App Engine development server
+
+## Test
+For Asynctask test and unit tests please follow these link for more details
+http://marksunghunpark.blogspot.in/2015/05/how-to-test-asynctask-in-android.html
+http://www.making-software.com/2012/10/31/testable-android-asynctask/
+https://web.archive.org/web/20160127060328/http://marcouberti.net/2015/07/11/mock-async-task-in-android-during-testing/
+https://stackoverflow.com/questions/12729280/junit-how-to-check-if-string-is-equal-to-one-of-two-strings
+
 
 ##How Do I Complete this Project?
 
